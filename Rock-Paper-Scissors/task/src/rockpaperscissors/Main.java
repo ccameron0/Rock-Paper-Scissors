@@ -14,7 +14,6 @@ public class Main {
         if (options.isEmpty()) {
             options = "rock,paper,scissors";
         }
-        //System.out.println(options);
         String[] optionsArray = options.split(",");
         return optionsArray;
 
@@ -23,16 +22,19 @@ public class Main {
     static void playGame (String[] optionsArray) {
 
         System.out.println("Okay, let's start");
+
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
-
 
         Random random = new Random();
         int computerChoice;
 
+        /** Creates a second array twice the size, to avoid outofbounds problem **/
         String[] auxiliaryArray = new String[(2 * optionsArray.length)];
 
-        // Copy a[] to b[] two times
+        /** Second array is the same as first but with set of options
+         * repeated a second time, in order for the computer to see what is to
+         * the right of the coputer choice, to determine if it beats the computer**/
         for (int i = 0; i < optionsArray.length; i++) {
             auxiliaryArray[i] = optionsArray[i];
             auxiliaryArray[i+ optionsArray.length] = optionsArray[i];
@@ -40,16 +42,11 @@ public class Main {
 
         while(true) {
 
-
             computerChoice = random.nextInt(3);
             String compChoiceString = optionsArray[computerChoice];
 
-            /**System.out.println(optionsArray[0]);
-
-            System.out.println(computerChoice);
-            System.out.println(compChoiceString);
-            System.out.println(input);**/
-
+            /** Booleans are created so that after all possibilities are checked,
+             * the lease rememaing possiblity is that the computer won**/
             boolean playerWon = false;
             boolean draw = false;
             boolean invalidInput = false;
@@ -117,8 +114,5 @@ public class Main {
         }
 
         playGame(createOptions());
-
-
-
     }
 }
